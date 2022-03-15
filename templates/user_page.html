@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title%}{{current_user.username}}'s Page{% endblock %}
+
+{% block content %}
+<p>
+
+    {% for msg in get_flashed_messages() %}
+    {{msg}}
+    {% endfor %}
+
+</p>
+
+<h1>This is the user page</h1>
+
+<div id="user-info-div">
+    <h2>User info</h2>
+    <h3>
+
+        <b>
+            Name: <i>{{current_user.first_name}} {{current_user.last_name}}</i><br>
+            Username: <i>{{current_user.username}}</i><br>
+            Email: <i>{{current_user.email}}</i><br>
+
+        </b>
+
+    </h3>
+</div>
+
+<div id="feedback-div">
+    <h2>Feedback</h2>
+    <form id="feedback_form"><button><a href="/users/{{current_user.username}}/feedback/add">Add Feedback</a></button>
+    </form>
+    <ol>
+        {% for feedback in current_user.feedback %}
+
+        <li>
+            {{ feedback.title }}<br>
+            {{ feedback.content }}<br>
+            <form method="POST"><button class="edit_feedbak_button"
+                    formaction="/users/feedback/{{feedback.id}}/edit">Edit</button></form>
+            <form method="POST"><button class="delete_feedbak_button"
+                    formaction="/feedback/{{feedback.id}}/delete">Delete</button></form>
+
+        </li>
+        {% endfor %}
+    </ol>
+
+</div>
+
+
+
+<div>
+    <form id="logout-button" method="POST" action="/logout"><button>Logout</button></form>
+</div>
+
+<div>
+    <form id="delete-user-button" method="POST" action="/users/{{current_user.username}}/delete">
+        <button>Delete Account</button>
+    </form>
+</div>
+
+{% endblock %}

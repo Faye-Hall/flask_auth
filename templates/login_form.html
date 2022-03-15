@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title%}Login{% endblock %}
+
+{% block content %}
+
+<div id=container-div>
+    <h2>Log-In</h2>
+    <form method="POST">
+
+        <h3>
+            <b>
+                {% for msg in get_flashed_messages() %}
+                {{msg}}
+                {% endfor%}
+            </b>
+        </h3>
+
+        {{form.hidden_tag()}}
+        {% for field in form
+        if field.widget.input_type != 'hidden' %}
+
+        <p>
+            {{field.label}}<br>
+            {{field}}
+
+            {% for error in field.errors %}
+            {{erorr}}
+            {% endfor %}
+
+        </p>
+        {% endfor %}
+
+        <button>Login</button>
+    </form>
+</div>
+
+{% endblock %}

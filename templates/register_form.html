@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title%}Register{% endblock %}
+
+{% block content %}
+
+<div id=container-div>
+    <h2>Register To Get Access</h2>
+
+    <h2>
+        <b>
+            <i>
+                {% for msg in get_flashed_messages() %}
+                {{msg}}
+                {% endfor %}
+            </i>
+        </b>
+    </h2>
+
+    <form method="POST">
+        {{form.hidden_tag()}}
+        {% for field in form
+        if field.widget.input_type != 'hidden' %}
+
+        <p>
+            {{field.label}}<br>
+            {{field}}
+
+            {% for error in field.errors %}
+            {{erorr}}
+            {% endfor %}
+
+        </p>
+        {% endfor %}
+
+
+        <button>Register!</button>
+    </form>
+
+    <h3>Already A Member? Click Here!</h3>
+
+    <button><a href="/login">Login</a></button>
+</div>
+
+{% endblock %}

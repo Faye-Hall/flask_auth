@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title%} Edit Feedback {% endblock %}
+
+{% block content %}
+<form method="POST">
+    <p>
+        {{form.hidden_tag()}}
+        {% for field in form
+    if field.widget.input_type != 'hidden' %}
+
+        <p>
+            {{field.label}}<br>
+            {{field}}
+
+            {% for error in field.errors %}
+            {{erorr}}
+            {% endfor %}
+
+        </p>
+        {% endfor %}
+        <button>Sumbit</button>
+    </p>
+</form>
+
+{% endblock %}
